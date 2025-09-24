@@ -5,13 +5,11 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo Starting build on `date`
-      - mvn -v
-      - java -version
+      - echo Build completed on `date`
       - mvn package -Dmaven.test.skip
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Build completed on `data`
 artifacts:
   files:
     - target/*.jar
