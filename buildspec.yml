@@ -8,7 +8,7 @@ phases:
       - echo Starting build on `date`
       - mvn -v
       - java -version
-      - mvn clean package -DskipTests
+      - mvn clean package -DskipTests=true
   post_build:
     commands:
       - echo Build completed on `date`
