@@ -21,36 +21,23 @@ version: 0.2
 env:
   runtime-versions:
     java: corretto21
-  variables:
-    MAVEN_OPTS: "-Xmx1024m"
 
 phases:
-  install:
-    commands:
-      - echo "Installing tools..."
-      - mvn -v
-      - java -version
   build:
     commands:
-      - echo "PWD:" && pwd
-      - echo "Tree (top level):" && ls -la
-      # If your pom is in a subfolder, change POM=path/to/pom.xml
-      - POM=pom.xml
-      - echo "Using POM at: $POM"
-      # Try to fetch dependencies first (clearer error if no internet/VPC issue)
-      - mvn -B -e -X -U -Dmaven.wagon.http.retryHandler.count=3 -f "$POM" dependency:go-offline
-      # Build (skip all tests, incl. integration)
-      - mvn -B -e -X -f "$POM" clean package -DskipTests -Dmaven.test.skip=true -DskipITs
+      - "echo Starting build on $(date)"
+      - mvn -v
+      - java -version
+      - mvn clean package -DskipTests=true
   post_build:
     commands:
-      - echo "Build completed on $(date)"
+      - "echo Build completed on $(date)"
+
 artifacts:
   files:
     - target/*.jar
   discard-paths: yes
-cache:
-  paths:
-    - /root/.m2/**/*
+
 
 
 
