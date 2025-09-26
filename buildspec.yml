@@ -17,22 +17,19 @@
 #    - target/*.jar
 #  discard-paths: yes
 version: 0.2
-
-env:
-  runtime-versions:
-    java: corretto21
-
 phases:
+  install:
+    runtime-versions:
+      java: corretto21
   build:
     commands:
-      - "echo Starting build on $(date)"
+      - echo Starting build on `date`
       - mvn -v
       - java -version
-      - mvn clean package -DskipTests=true
+      - mvn clean package -DskipTests
   post_build:
     commands:
-      - "echo Build completed on $(date)"
-
+      - echo Build completed on `date`
 artifacts:
   files:
     - target/*.jar
