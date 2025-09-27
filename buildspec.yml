@@ -1,46 +1,18 @@
-#version: 0.2
-#phases:
-#  install:
-#    runtime-versions:
-#      java: corretto17
-#  build:
-#    commands:
-#      - echo Starting build on `date`
-#      - mvn -v
-#      - java -version
-#      - mvn clean package -DskipTests=true
-#  post_build:
-#    commands:
-#      - - mvn -B -e -X --no-transfer-progress -f pom.xml clean package -DskipTests -Dmaven.test.skip=true -DskipITs | tee build.log
-##      - echo Build completed on `date`
-#artifacts:
-#  files:
-#    - target/*.jar
-#  discard-paths: yes
 version: 0.2
-env:
-  runtime-versions:
-    java: corretto21
-
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
   build:
     commands:
-      - "echo Starting build on $(date)"
-      - "mvn -v && java -version"
-      - "java -version"
-      - "mvn -B -U --no-transfer-progress -e -f pom.xml clean package -DskipTests -Dmaven.test.skip=true -DskipITs"
-
+      - echo Starting build on `date`
+      - mvn -v
+      - java -version
+      - mvn clean package -DskipTests
+  post_build:
+    commands:
+      - echo Build completed on `date`
 artifacts:
   files:
     - target/*.jar
   discard-paths: yes
-
-cache:
-  paths:
-    - /root/.m2/**/*
-
-
-
-
-
-
