@@ -24,11 +24,12 @@ env:
 phases:
   build:
     commands:
-      - "echo Starting build on $(date)"
-      - "mvn -B -e --no-transfer-progress clean package -DskipTests | tee build.log"
-      - "echo '----- FIRST ERROR -----' && grep -n '^\[ERROR\]' -m1 -A20 build.log || true"
+      - 'echo Starting build on $(date)'
+      - 'mvn -B -e --no-transfer-progress clean package -DskipTests | tee build.log'
+      - 'echo ----- FIRST ERROR ----- && grep -n -m1 -A20 "[ERROR]" build.log || true'
 
 artifacts:
   files:
     - target/*.jar
   discard-paths: yes
+
